@@ -1,6 +1,6 @@
 import pool from "../db";
 
-class device{
+class Device{
     static async creat({userId,deviceName}){
         const[result]=await pool.execute(
             'INSERT INTO devices (userId,deviceName) VALUES (?,?)',[userId,deviceName]
@@ -19,11 +19,11 @@ class device{
         )
         return rowes[0] ||null
     }
-    static async delet(id){
+    static async delete(id){
        await pool.execute(
             'DELET FROM devices WHERE id=?',[id]
         )
     }
 }
 
-export default device
+export default Device

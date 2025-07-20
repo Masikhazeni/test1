@@ -21,7 +21,7 @@ class User{
         )
         return rows[0] || null
     }
-    static async findByEmail(phoneNumber){
+    static async findByEmail(email){
         const [rows]=await pool.execute(
             'SELECT * FROM users WHERE email=?',
             [email]

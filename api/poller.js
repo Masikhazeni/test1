@@ -1,5 +1,5 @@
-import pool from "../db/db.js";
-import { broadcast } from "../utils/sse.js";
+import pool from "./db.js";
+import { broadcast } from "./sse.js";
 
 let lastId = 0;
 
