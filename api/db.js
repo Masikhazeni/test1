@@ -6,4 +6,6 @@ const pool=mysql.createPool({
     database:'devise_data_db'
 })
 
+
+
 export default pool
