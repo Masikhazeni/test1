@@ -1,4 +1,4 @@
-import pool from "../db";
+import pool from "../db.js";
 class DeviceData {
   static async creat({ deviceId, temperature, humidity,date }) {
     const [result] = await pool.execute(

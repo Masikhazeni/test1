@@ -1,5 +1,5 @@
-import Device from "../Models/deviceMd";
-import User from "../Models/userMd";
+import Device from "../Models/deviceMd.js";
+import User from "../Models/userMd.js";
 
 class DeviceController {
   static async createDevice(req, res) {

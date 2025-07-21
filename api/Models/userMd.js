@@ -1,4 +1,4 @@
-import pool from "../db";
+import pool from "../db.js";
 class User{
     static async create({phoneNumber,email,password}){
         const [result]=await pool.execute(

@@ -1,4 +1,4 @@
-import pool from "../db";
+import pool from "../db.js";
 
 class Device{
     static async creat({userId,deviceName}){

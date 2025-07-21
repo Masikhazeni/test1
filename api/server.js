@@ -1,11 +1,12 @@
-import mongoose from "mongoose";
-import app, { __dirname } from "./app.js";
 import dotenv from 'dotenv';
 import { startPolling } from './poller.js';
-dotenv.config({path:`${__dirname}/config.env`})
+import app from './app.js';
 
+dotenv.config({ path: './config/config.env' });
 
-app.listen(process.env.PORT,()=>{
-    console.log('server is running')
-    startPolling()
-})
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  startPolling();
+});
