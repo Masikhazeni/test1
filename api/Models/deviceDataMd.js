@@ -1,9 +1,10 @@
 import pool from "../db.js";
+import { broadcast } from "../sse.js";
 class DeviceData {
-  static async creat({ deviceId, temperature, humidity,date }) {
+  static async creat({ device, temperature, humidity,date }) {
     const [result] = await pool.execute(
-      "INSERT INTO deviseDate (deviceId, temperature, humidity,date) VALUES (?,?,?.?)",
-      [deviceId, temperature, humidity,date]
+      "INSERT INTO deviceDate (device, temperature, humidity,date) VALUES (?,?,?,?)",
+      [device, temperature, humidity,date]
     );
     return result.insertId;
   }
@@ -29,12 +30,30 @@ class DeviceData {
     );
     return rows[0];
   }
-  static async findByUserId(userId) {
-const [rows] = await pool.execute(
-  "SELECT * FROM deviceDate INNER JOIN devices ON deviceDate.device = devices.id WHERE devices.userId = ?",
+//   static async findByUserId(userId) {
+// const [rows] = await pool.execute(
+//   "SELECT * FROM deviceDate JOIN devices ON deviceDate.device = devices.id WHERE devices.userId = ?",
+//   [userId]
+// );
+//   }
+
+static async findByUserId(userId) {
+ const [rows] = await pool.execute(
+  `SELECT 
+    deviceDate.deviceDataId,
+    deviceDate.temperature,
+    deviceDate.humidity,
+    deviceDate.date,
+    devices.deviceName
+  FROM deviceDate 
+  JOIN devices ON deviceDate.device = devices.id 
+  WHERE devices.userId = ?
+  ORDER BY deviceDate.date DESC
+  LIMIT 1`,
   [userId]
 );
-  }
+  return rows;
+}
 }
 
 export default DeviceData

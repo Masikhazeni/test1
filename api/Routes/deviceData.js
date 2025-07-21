@@ -7,6 +7,6 @@ const DeviceDataRouter = express.Router();
 
 DeviceDataRouter.post('/', DeviceDataController.storeData);
 DeviceDataRouter.get('/device/:deviceId', DeviceDataController.getDeviceData);
-DeviceDataRouter.get('/user/:userId',isLogin, DeviceDataController.getUserDeviceData);
+DeviceDataRouter.get('/user/:userId', DeviceDataController.getUserDeviceData);
 
 export default DeviceDataRouter;

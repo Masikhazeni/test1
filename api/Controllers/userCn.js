@@ -32,7 +32,44 @@ class UserController {
 
       res.status(201).json({
         message: "User created successfully",
-        data: user,
+        data: {phoneNumber:user.phoneNumber,
+          email:user.email,
+          id:user.id
+        },
+        token,
+      });
+    } catch (error) {
+      console.error("Error creating user:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+  static async login(req, res) {
+    try {
+      const { phoneNumber, password } = req.body;
+      const user = await User.findByPhoneNumber(phoneNumber);
+
+      if (!user ) {
+        return res.status(400).json({
+          error: "کاربر وجود ندارد",
+        });
+      }
+    
+    const checkPass=bcryptjs.compareSync(password,user.password)
+    if(!checkPass){
+      return res.status(400).json({
+        success:false,
+        message:'شماره تلفن یا رمز عبور نادرست است'
+      })
+    }
+      const token = jwt.sign({ userId:user.id}, process.env.SECRET_JWT);
+      
+
+      res.status(201).json({
+        message: "باموفقیت وارد شدید",
+        data: {phoneNumber:user.phoneNumber,
+          email:user.email,
+          id:user.id
+        },
         token,
       });
     } catch (error) {

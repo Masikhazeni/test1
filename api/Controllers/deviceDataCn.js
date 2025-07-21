@@ -1,86 +1,118 @@
 import Device from "../Models/deviceMd.js";
 import DeviceData from "../Models/deviceDataMd.js";
+import { broadcast } from "../sse.js";
 
 class DeviceDataController {
-  static async storeData(req,res){
+  static async storeData(req, res) {
     try {
-      const { deviceId, payload } = req.body;
-      const { temperature, humidity } = payload;
-      const device = await Device.findById(deviceId)
-      if(!device){
-        return res.status(404).json({success:false,message:'دستگاه یافت نشد'})
+      const { device, payload } = req.body;
+      const { temperature, humidity ,date} = payload;
+      const deviced = await Device.findById(device);
+      if (!deviced) {
+        return res
+          .status(404)
+          .json({ success: false, message: "دستگاه یافت نشد" });
       }
-      const data=await DeviceData.creat({deviceId,temperature,humidity})
+      const data = await DeviceData.creat({ device, temperature, humidity ,date});
 
-      const newData = await DeviceData.findLatestByDeviceId(deviceId);
-      broadcast(device.userId, newData);
-       res.status(201).json({
-        success:true,
+      const newData = await DeviceData.findLatestByDeviceId(device);
+      broadcast(deviced.userId, newData);
+      res.status(201).json({
+        success: true,
         data,
-        message: 'اطلاعات با موفقیت ذخیره شد',
-       
+        message: "اطلاعات با موفقیت ذخیره شد",
       });
-
     } catch (error) {
-      console.error('خطای داخلی سرور', error);
-      res.status(500).json({ 
+      console.error("خطای داخلی سرور", error);
+      res.status(500).json({
         success: false,
-        message: 'خطای داخلی سرور' 
+        message: "خطای داخلی سرور",
       });
     }
   }
 
-  static async getDeviceData(req,res){
+  static async getDeviceData(req, res) {
     try {
       const { deviceId } = req.params;
-      const device = await Device.findById(deviceId)
-      if(!device){
-        return res.status(404).json({success:false,message:'دستگاه یافت نشد'})
+      const device = await Device.findById(deviceId);
+      if (!device) {
+        return res
+          .status(404)
+          .json({ success: false, message: "دستگاه یافت نشد" });
       }
-      const data=await DeviceData.findByDeviceId(deviceId)
-      
-       res.status(201).json({
-        success:true,
-        data,
-    });
+      const data = await DeviceData.findByDeviceId(deviceId);
 
+      res.status(201).json({
+        success: true,
+        data,
+      });
     } catch (error) {
-      console.error('خطای داخلی سرور', error);
-      res.status(500).json({ 
+      console.error("خطای داخلی سرور", error);
+      res.status(500).json({
         success: false,
-        message: 'خطای داخلی سرور' 
+        message: "خطای داخلی سرور",
       });
     }
   }
-  static async getUserDeviceData(req,res){
-    try {
-      const { userId } = req.params;
-      if(userId!=req.userId){
-        return res.status(401).json({
-          success:false,
-          message:'شما اجازه دسترسی ندارید'
-        })
-      }
-      const device = await Device.findByUserId(userId)
-      if(!device){
-        return res.status(404).json({success:false,message:'دستگاه یافت نشد'})
-      }
-      const data=await DeviceData.findByUserId(userId)
-      
-       res.status(201).json({
-        success:true,
-        data,
-    });
+  // static async getUserDeviceData(req, res) {
+  //   try {
+  //     const { userId } = req.params;
+  //     // if (String(userId) !== String(req.userId)) {
+  //     //   return res.status(401).json({
+  //     //     success: false,
+  //     //     message: "شما اجازه دسترسی ندارید",
+  //     //   });
+  //     // }
+  //     const device = await Device.findByUserId(userId);
+  //     if (!device) {
+  //       return res
+  //         .status(404)
+  //         .json({ success: false, message: "دستگاه یافت نشد" });
+  //     }
+  //     const data = await DeviceData.findByUserId(userId);
 
-    } catch (error) {
-      console.error('خطای داخلی سرور', error);
-      res.status(500).json({ 
-        success: false,
-        message: 'خطای داخلی سرور' 
+  //     res.status(201).json({
+  //       success: true,
+  //       data
+  //     });
+  //   } catch (error) {
+  //     console.error("خطای داخلی سرور", error);
+  //     res.status(500).json({
+  //       success: false,
+  //       message: "خطای داخلی سرور",
+  //     });
+  //   }
+  // }
+  static async getUserDeviceData(req, res) {
+  try {
+    const { userId } = req.params;
+    const device = await Device.findByUserId(userId);
+    
+    if (!device) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "دستگاه یافت نشد" 
       });
     }
+
+    const data = await DeviceData.findByUserId(userId);
+    console.log("Retrieved data:", data); // برای دیباگ
+
+    res.status(200).json({
+      success: true,
+      data: data || [] // در صورت نبود داده، آرایه خالی برگردانده شود
+    });
+  } catch (error) {
+    console.error("خطای داخلی سرور", error);
+    res.status(500).json({
+      success: false,
+      message: "خطای داخلی سرور",
+    });
   }
 }
+}
 
+export default DeviceDataController;
 
-export default DeviceDataController
+// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTc1MzA4MzQxNH0.xk6nksRoD4nGvbUq2zMj1qmnMXMrLGW2lPqbXDIVfNA"
+// id:2
