@@ -1,4 +1,4 @@
-const clients = new Map(); // { userId: Set(res) }
+const clients = new Map(); 
 
 export function addClient(userId, res) {
     if (!clients.has(userId)) {
@@ -24,6 +24,8 @@ export function broadcast(userId, data) {
                 client.write(message);
             } catch (err) {
                 console.error('Error sending SSE message:', err);
+                 clients.get(userId).delete(client);   
+                //  حذف کردن کلاینت خراب
             }
         });
     }

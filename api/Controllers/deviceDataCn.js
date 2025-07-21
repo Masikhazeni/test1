@@ -86,6 +86,13 @@ class DeviceDataController {
   static async getUserDeviceData(req, res) {
   try {
     const { userId } = req.params;
+     if(userId!=req.userId){
+        return res.status(401).json({
+          success:false,
+          message:'شما اجازه دسترسی ندارید'
+        })
+      }
+
     const device = await Device.findByUserId(userId);
     
     if (!device) {
@@ -96,11 +103,11 @@ class DeviceDataController {
     }
 
     const data = await DeviceData.findByUserId(userId);
-    console.log("Retrieved data:", data); // برای دیباگ
+    console.log("Retrieved data:", data); 
 
     res.status(200).json({
       success: true,
-      data: data || [] // در صورت نبود داده، آرایه خالی برگردانده شود
+      data: data || []
     });
   } catch (error) {
     console.error("خطای داخلی سرور", error);

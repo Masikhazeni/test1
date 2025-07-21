@@ -1,9 +1,11 @@
 import User from "../Models/userMd.js";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { validationResult } from "express-validator";
 
 class UserController {
   static async createUser(req, res) {
+   
     try {
       const { phoneNumber, email, password } = req.body;
       const existingByPhone = await User.findByPhoneNumber(phoneNumber);
@@ -13,12 +15,6 @@ class UserController {
         return res.status(400).json({
           error: "کاربر با این شماره تلفن یا ایمیل قبلا وارد شده است",
         });
-      }
-      const passReg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/);
-      if (!passReg.test(password)) {
-        return res
-          .status(400)
-          .json({ success: false, message: "رمز عبور مناسب نیست" });
       }
       const hashPassword = bcryptjs.hashSync(password, 10);
 
@@ -44,6 +40,7 @@ class UserController {
     }
   }
   static async login(req, res) {
+    
     try {
       const { phoneNumber, password } = req.body;
       const user = await User.findByPhoneNumber(phoneNumber);
