@@ -5,6 +5,12 @@ import DeviceData from "../Models/deviceDataMd.js";
 class SSEController {
   static async streamUserData(req, res) {
     const { userId } = req.params;
+    if(userId!=req.userId){
+        return res.status(401).json({
+          success:false,
+          message:'شما اجازه دسترسی ندارید'
+        })
+      }
 
       res.writeHead(200, {
         "Content-Type": "text/event-stream",

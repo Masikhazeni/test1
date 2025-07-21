@@ -55,6 +55,12 @@ class DeviceDataController {
   static async getUserDeviceData(req,res){
     try {
       const { userId } = req.params;
+      if(userId!=req.userId){
+        return res.status(401).json({
+          success:false,
+          message:'شما اجازه دسترسی ندارید'
+        })
+      }
       const device = await Device.findByUserId(userId)
       if(!device){
         return res.status(404).json({success:false,message:'دستگاه یافت نشد'})

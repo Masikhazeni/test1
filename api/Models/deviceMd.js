@@ -1,7 +1,7 @@
 import pool from "../db.js";
 
 class Device{
-    static async creat({userId,deviceName}){
+    static async create({userId,deviceName}){
         const[result]=await pool.execute(
             'INSERT INTO devices (userId,deviceName) VALUES (?,?)',[userId,deviceName]
         )

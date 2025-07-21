@@ -1,6 +1,7 @@
 import pool from "../db.js";
 class User{
     static async create({phoneNumber,email,password}){
+        
         const [result]=await pool.execute(
             'INSERT INTO users(phoneNumber,email,password) VALUES(?,?,?)',
             [phoneNumber,email,password]

@@ -1,12 +1,13 @@
 import express from 'express';
-import UserController from '../controllers/userController.js';
+import UserController from '../Controllers/userCn.js';
+import { isLogin } from '../Middleware/islogin.js';
 
-const router = express.Router();
+const UserRouter = express.Router();
 
-// POST /api/users - ایجاد کاربر جدید
-router.post('/', UserController.createUser);
 
-// GET /api/users/:id - دریافت اطلاعات کاربر
-router.get('/:id', UserController.getUser);
+UserRouter.post('/', UserController.createUser);
 
-export default router;
+
+UserRouter.get('/:id', UserController.getUser);
+
+export default UserRouter;
