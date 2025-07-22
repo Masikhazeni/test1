@@ -52,6 +52,7 @@ poller.js            # دریافت داده‌های جدید از MySQL هر �
 📡 نقاط دسترسی (Endpoints)
 📌 احراز هویت کاربران
 مسیر	توضیح
+
 POST /api/users	ثبت‌نام کاربر
 
 POST /api/users/login	ورود و دریافت توکن
