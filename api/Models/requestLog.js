@@ -4,13 +4,12 @@ const requestLogSchema = new mongoose.Schema({
   method: String,
   path: String,
   headers: Object,
-  body: Object,
-  query: Object,
   params: Object,
-  timestamp: {
-    type: Date,
-    default: Date.now,
-  },
+  query: Object,
+  body: Object,
+  statusCode: Number,
+  success: Boolean,
+  timestamp: { type: Date, default: Date.now }
 });
 
 const RequestLog = mongoose.model("RequestLog", requestLogSchema);
