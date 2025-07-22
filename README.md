@@ -108,7 +108,7 @@ Authorization: Bearer <token>
 
 Postman / Insomnia
 
-curl
+curl/httpie
 
 مرورگر برای تست فایل HTML
 
