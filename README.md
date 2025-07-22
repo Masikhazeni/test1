@@ -12,7 +12,7 @@
 - MongoDB (در صورت استفاده برای کاربران/دستگاه‌ها - اگر در مدل‌ها Mongo استفاده شده)
 
 ### نصب
-
+<div dir="rtl">
 ```bash
 git clone https://github.com/your-username/your-repo.git
 cd your-repo
@@ -100,3 +100,4 @@ MIT
 
 # test1
 
+</div>
