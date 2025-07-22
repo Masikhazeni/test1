@@ -30,6 +30,7 @@ npm run dev
 bash
 Copy
 Edit
+<div dir="ltr">
 ├── app.js               # تنظیم روت‌ها و میدلورها
 ├── server.js            # اجرای سرور و Polling
 ├── Routes/              # تمامی روت‌های API
@@ -39,6 +40,7 @@ Edit
 ├── sse.js               # مدیریت اتصال‌های SSE
 ├── poller.js            # دریافت داده‌های جدید از MySQL هر ۱۵ دقیقه
 ├── views/sse-test.html  # فایل تست SSE سمت کلاینت
+</div>
 📡 نقاط دسترسی (Endpoints)
 📌 احراز هویت کاربران
 مسیر	توضیح
