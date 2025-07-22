@@ -39,8 +39,10 @@ class UserController {
       res.status(500).json({ error: "Internal server error" });
     }
   }
+
+
+
   static async login(req, res) {
-    
     try {
       const { phoneNumber, password } = req.body;
       const user = await User.findByPhoneNumber(phoneNumber);
@@ -74,6 +76,8 @@ class UserController {
       res.status(500).json({ error: "Internal server error" });
     }
   }
+
+
 
   static async getUser(req, res) {
     try {

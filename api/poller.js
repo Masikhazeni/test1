@@ -18,7 +18,6 @@ export async function startPolling() {
             
             if (rows.length > 0) {
                 const latest = rows[0];
-                lastId = latest.deviceDataId;
                 sendToUser(latest.userId, latest);
             }
         }, 15 * 60 * 1000);

@@ -15,8 +15,8 @@ class DeviceDataController {
       }
       const data = await DeviceData.creat({ device, temperature, humidity ,date});
 
-      const newData = await DeviceData.findLatestByDeviceId(device);
-      sendToUser(deviced.userId, newData);
+      // const newData = await DeviceData.findLatestByDeviceId(device);
+      // sendToUser(deviced.userId, newData);         چون با poolerهر 15 دقیقه داده های به روز ازسال میشن دیگ احتیاجی باین نیست
       res.status(201).json({
         success: true,
         data,
@@ -30,6 +30,9 @@ class DeviceDataController {
       });
     }
   }
+
+
+
 
   static async getDeviceData(req, res) {
     try {
@@ -54,35 +57,9 @@ class DeviceDataController {
       });
     }
   }
-  // static async getUserDeviceData(req, res) {
-  //   try {
-  //     const { userId } = req.params;
-  //     // if (String(userId) !== String(req.userId)) {
-  //     //   return res.status(401).json({
-  //     //     success: false,
-  //     //     message: "شما اجازه دسترسی ندارید",
-  //     //   });
-  //     // }
-  //     const device = await Device.findByUserId(userId);
-  //     if (!device) {
-  //       return res
-  //         .status(404)
-  //         .json({ success: false, message: "دستگاه یافت نشد" });
-  //     }
-  //     const data = await DeviceData.findByUserId(userId);
+  
 
-  //     res.status(201).json({
-  //       success: true,
-  //       data
-  //     });
-  //   } catch (error) {
-  //     console.error("خطای داخلی سرور", error);
-  //     res.status(500).json({
-  //       success: false,
-  //       message: "خطای داخلی سرور",
-  //     });
-  //   }
-  // }
+
   static async getUserDeviceData(req, res) {
   try {
     const { userId } = req.params;
@@ -103,7 +80,6 @@ class DeviceDataController {
     }
 
     const data = await DeviceData.findByUserId(userId);
-    console.log("Retrieved data:", data); 
 
     res.status(200).json({
       success: true,

@@ -1,5 +1,4 @@
 import pool from "../db.js";
-import { sendToUser } from "../sse.js";
 class DeviceData {
   static async creat({ device, temperature, humidity,date }) {
     const [result] = await pool.execute(
@@ -30,12 +29,6 @@ class DeviceData {
     );
     return rows[0];
   }
-//   static async findByUserId(userId) {
-// const [rows] = await pool.execute(
-//   "SELECT * FROM deviceDate JOIN devices ON deviceDate.device = devices.id WHERE devices.userId = ?",
-//   [userId]
-// );
-//   }
 
 static async findByUserId(userId) {
  const [rows] = await pool.execute(
@@ -52,7 +45,7 @@ static async findByUserId(userId) {
   LIMIT 1`,
   [userId]
 );
-  return rows;
+ return rows[0] || null;
 }
 }
 
