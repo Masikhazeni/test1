@@ -17,7 +17,7 @@ class Device{
         const[rowes]=await pool.execute(
             'SELECT * FROM devices WHERE userId=?',[userId]
         )
-        return rowes[0] ||null
+        return rowes ||null
     }
     static async delete(id){
        await pool.execute(

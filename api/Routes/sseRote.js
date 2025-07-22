@@ -11,6 +11,6 @@ const userIdValidation = [
     .withMessage('شناسه کاربر الزامی است'),
 ];
 
-SSERouter.get('/:userId',isLogin,userIdValidation,checkValidation,SSEController.streamUserData);
+SSERouter.get('/:userId',userIdValidation,checkValidation,SSEController.streamUserData);
 
 export default SSERouter;

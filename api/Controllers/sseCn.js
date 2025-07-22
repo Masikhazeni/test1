@@ -6,23 +6,23 @@ class SSEController {
   static async streamUserData(req, res) {
     const { userId } = req.params;
 
-    if (userId != req.userId) {
-      return res.status(401).json({
-        success: false,
-        message: "شما اجازه دسترسی ندارید",
-      });
-    }
+    // if (userId != req.userId) {
+    //   return res.status(401).json({
+    //     success: false,
+    //     message: "شما اجازه دسترسی ندارید",
+    //   });
+    // }
 
     res.writeHead(200, {
       "Content-Type": "text/event-stream",
       "Cache-Control": "no-cache",
       Connection: "keep-alive",
     });
-    res.flushHeaders(); // مهم
+    res.flushHeaders(); 
 
     addClient(userId, res);
 
-    // پیام اولیه اختیاری
+    
     res.write(`data: ${JSON.stringify({ connected: true })}\n\n`);
 
     try {

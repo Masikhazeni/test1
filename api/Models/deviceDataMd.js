@@ -45,7 +45,7 @@ static async findByUserId(userId) {
   LIMIT 1`,
   [userId]
 );
- return rows[0] || null;
+ return rows|| null;
 }
 }
 

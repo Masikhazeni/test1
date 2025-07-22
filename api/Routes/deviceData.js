@@ -35,6 +35,6 @@ const userIdValidation = [
 
 DeviceDataRouter.post('/', storeDataValidation,checkValidation,DeviceDataController.storeData);
 DeviceDataRouter.get('/device/:deviceId',deviceIdValidation,checkValidation, DeviceDataController.getDeviceData);
-DeviceDataRouter.get('/user/:userId', isLogin,userIdValidation,checkValidation,DeviceDataController.getUserDeviceData);
+DeviceDataRouter.get('/user/:userId',userIdValidation,checkValidation,DeviceDataController.getUserDeviceData);
 
 export default DeviceDataRouter;
