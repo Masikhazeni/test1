@@ -14,15 +14,20 @@
 ### نصب
 <div dir="rtl">
 ```bash
+ 
 git clone https://github.com/your-username/your-repo.git
+
 cd your-repo
+
 npm install
+
 اجرای پروژه
 bash
+
 Copy
+
 Edit
-# فایل .env بسازید:
-cp .env.example config.env
+
 
 # سپس سرور را اجرا کنید:
 npm run dev
