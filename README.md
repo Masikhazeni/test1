@@ -112,7 +112,7 @@ Authorization: Bearer <token>
 🧪 تست
 برای تست API‌ها می‌توانید از ابزارهای زیر استفاده کنید:
 
-Postman / Insomnia
+ Insomnia
 
 curl/httpie
 
