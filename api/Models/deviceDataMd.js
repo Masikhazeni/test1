@@ -1,5 +1,5 @@
 import pool from "../db.js";
-import { broadcast } from "../sse.js";
+import { sendToUser } from "../sse.js";
 class DeviceData {
   static async creat({ device, temperature, humidity,date }) {
     const [result] = await pool.execute(

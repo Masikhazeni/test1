@@ -1,6 +1,5 @@
 import Device from "../Models/deviceMd.js";
-import User from "../Models/userMd.js";
-import jwt from 'jsonwebtoken'
+
 
 class DeviceController {
   static async getUserDevices(req, res) {

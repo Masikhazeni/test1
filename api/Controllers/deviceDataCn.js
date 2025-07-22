@@ -1,6 +1,6 @@
 import Device from "../Models/deviceMd.js";
 import DeviceData from "../Models/deviceDataMd.js";
-import { broadcast } from "../sse.js";
+import { sendToUser } from "../sse.js";
 
 class DeviceDataController {
   static async storeData(req, res) {
@@ -16,7 +16,7 @@ class DeviceDataController {
       const data = await DeviceData.creat({ device, temperature, humidity ,date});
 
       const newData = await DeviceData.findLatestByDeviceId(device);
-      broadcast(deviced.userId, newData);
+      sendToUser(deviced.userId, newData);
       res.status(201).json({
         success: true,
         data,

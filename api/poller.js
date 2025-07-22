@@ -1,5 +1,5 @@
 import pool from "./db.js";
-import { broadcast } from "./sse.js";
+import { sendToUser } from "./sse.js";
 
 let lastId = 0;
 
@@ -19,7 +19,7 @@ export async function startPolling() {
             if (rows.length > 0) {
                 const latest = rows[0];
                 lastId = latest.deviceDataId;
-                broadcast(latest.userId, latest);
+                sendToUser(latest.userId, latest);
             }
         }, 15 * 60 * 1000);
     } catch (error) {

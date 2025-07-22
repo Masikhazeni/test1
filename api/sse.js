@@ -16,7 +16,7 @@ export function addClient(userId, res) {
     });
 }
 
-export function broadcast(userId, data) {
+export function sendToUser(userId, data) {
     if (clients.has(userId)) {
         const message = `data: ${JSON.stringify(data)}\n\n`;
         clients.get(userId).forEach(client => {
