@@ -28,7 +28,7 @@ class SSEController {
     try {
       const devices = await Device.findByUserId(userId);
 
-      if (!devices || devices.length === 0) {
+      if (!devices ) {
         return res.write(
           `data: ${JSON.stringify({ message: "دستگاهی یافت نشد" })}\n\n`
         );

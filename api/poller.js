@@ -26,7 +26,7 @@ export async function startPolling() {
       } catch (queryErr) {
         console.error("Database polling error:", queryErr);
       }
-    }, 15 * 60 * 1000);
+    }, 5*1000);
   } catch (error) {
     console.error("Polling setup error:", error);
   }
