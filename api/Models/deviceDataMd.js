@@ -22,6 +22,8 @@ class DeviceData {
     );
     return rows;
   }
+
+
   static async findLatestByDeviceId(deviceId) {
     const [rows] = await pool.execute(
      'SELECT * FROM deviceDate WHERE device = ? ORDER BY deviceDataId DESC LIMIT 1',
@@ -41,8 +43,7 @@ static async findByUserId(userId) {
   FROM deviceDate 
   JOIN devices ON deviceDate.device = devices.id 
   WHERE devices.userId = ?
-  ORDER BY deviceDate.date DESC
-  LIMIT 1`,
+  ORDER BY deviceDate.date DESC`,
   [userId]
 );
  return rows|| null;

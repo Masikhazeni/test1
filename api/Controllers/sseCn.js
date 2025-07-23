@@ -36,7 +36,7 @@ class SSEController {
 
       for (const device of devices) {
         const latestData = await DeviceData.findLatestByDeviceId(device.id);
-        if (latestData && !res.writableEnded) {
+        if (latestData ) {
           res.write(`data: ${JSON.stringify(latestData)}\n\n`);
         }
       }

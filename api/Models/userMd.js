@@ -8,6 +8,8 @@ class User{
         )
         return result.insertId
     }
+
+
     static async findById(id){
         const [rows]=await pool.execute(
             'SELECT * FROM users WHERE id=?',
@@ -15,6 +17,8 @@ class User{
         )
         return rows[0] || null
     }
+
+
     static async findByPhoneNumber(phoneNumber){
         const [rows]=await pool.execute(
             'SELECT * FROM users WHERE phoneNumber=?',
@@ -22,6 +26,8 @@ class User{
         )
         return rows[0] || null
     }
+
+    
     static async findByEmail(email){
         const [rows]=await pool.execute(
             'SELECT * FROM users WHERE email=?',
